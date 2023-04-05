@@ -1,4 +1,19 @@
-#add hostname
-#set ip address and subnet
-#set default gateway
-#set up backup feature dhcp and dns roles then restart machine
+# Add the hostname
+$hostname = Read-Host "Enter the hostname:"
+Rename-Computer -NewName $hostname -Force
+
+# Set the IP address and subnet mask
+$ipAddress = Read-Host "Enter the IP address (e.g. 192.168.1.100):"
+$subnetMask = Read-Host "Enter the subnet mask (e.g. 255.255.255.0):"
+New-NetIPAddress -IPAddress $ipAddress -PrefixLength (Get-NetIPAddress -IPAddress $ipAddress).PrefixLength -InterfaceIndex (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).ifIndex -DefaultGateway 0.0.0.0
+
+# Set the default gateway
+$defaultGateway = Read-Host "Enter the default gateway (e.g. 192.168.1.1):"
+New-NetRoute -DestinationPrefix 0.0.0.0/0 -Gateway $defaultGateway
+
+# Install the Backup feature, DHCP, and DNS roles
+Install-WindowsFeature -Name Backup-Features,DHCP,DNS -IncludeManagementTools
+
+# Restart the machine
+Restart-Computer
+
