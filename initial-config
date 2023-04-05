@@ -1,0 +1,4 @@
+#add hostname
+#set ip address and subnet
+#set default gateway
+#set up backup feature dhcp and dns roles then restart machine
