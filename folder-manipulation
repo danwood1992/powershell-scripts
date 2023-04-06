@@ -1,0 +1,4 @@
+New-Item -Path G:/folder/subfolder ItemType Directory
+
+New-SMBShare -Name "admin" -Path G:\admin -FullAccess "Everyone"
+New-SMBShare -Name "eng" -Path G:\eng -FullAccess "Everyone"
