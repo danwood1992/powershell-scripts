@@ -1,6 +1,23 @@
+#Create directory
 New-Item -Path G:/folder/subfolder ItemType Directory
 
 New-SMBShare -Name "admin" -Path G:\admin -FullAccess "Everyone"
 New-SMBShare -Name "eng" -Path G:\eng -FullAccess "Everyone"
+
+#To test#
+$Admin = @{
+    Name = 'Admin'
+    Path = 'G:\admin'
+    FullAccess = 'Everyone'
+}
+
+$Eng = @{
+    Name = 'Eng'
+    Path = 'G:\eng'
+    FullAccess = 'Everyone'
+}
+New-SmbShare @Admin
+New-SmbShare @Eng
+#To test#
 
 Get-SmbShare > shares.txt
